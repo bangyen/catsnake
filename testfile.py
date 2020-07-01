@@ -1,7 +1,5 @@
 import catsnake
 
-i = catsnake.imag(2)
-j = 5
-
-n = i + j
-print(n.real, n.imag)
+i = catsnake.comp(2,3)
+j = catsnake.imag(3)
+print(j)

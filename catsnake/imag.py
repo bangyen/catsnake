@@ -8,29 +8,37 @@ class comp:
     def __add__(self, other):
         #add complex with other complex
         if type(other) == "comp":
-            real = self.real + other.real
-            imag = self.imag + other.imag
-            return comp(real, imag)
-        
+            r = self.real + other.real
+            i = self.imag + other.imag
+            return comp(r, i)
         #add complex with imaginary
         if type(other) == "imag":
-            imag = self.imag + other.val
-            return comp(self.real, imag)
-
+            i = self.imag + other.val
+            return comp(self.real, i)
         #add complex with real
         else:
-            real = self.real + other
-            return comp(real, self.imag)
+            r = self.real + other
+            return comp(r, self.imag)
     
+    #subtract 2 complex numbers
     def __sub__(self, other):
-        #subtract complex
+        #subtract complex from other complex
         if type(other) == "comp":
-            real = self.real - other.real
-            imag = self.imag - other.imag
-            return comp(real, imag)
+            r = self.real - other.real
+            i = self.imag - other.imag
+            return comp(r, i)
+        #subtract imaginary from complex
+        if type(other) == "imag":
+            i = self.imag - other.val
+            return comp(self.real, i)
+        #subtract real from complex
         else:
-            real = self.real - other
-            return comp(real, self.imag)
+            r = self.real - other
+            return comp(r, self.imag)
+    
+    #define print and to string method
+    def __str__(self):
+        return str(self.real) + " + " + str(self.imag) + "i"
 
 
 class imag:
@@ -53,12 +61,32 @@ class imag:
             #return complex
             return comp(other, self.val)
     
+    #subtract
     def __sub__(self, other):
+        #imag - imag
         if type(other) == "imag":
             return imag(self.val - other.val)
-        
+        #imag - complex
         if type(other) == "comp":
-            return comp(other.real, self.val - other.imag)
-    
-        else:
             return comp(-other.real, self.val - other.imag)
+        #imag - real
+        else:
+            return comp(-other, self.val)
+    
+    #multiply
+    def __mul__(self, other):
+        #imag * imag
+        if type(other) == "imag":
+            return -1 * self.val * other.val
+        #imag * complex
+        if type(other) == "comp":
+            r = -1 * self.val * other.imag
+            i = self.val * other.real
+            return comp(r, i)
+        #imag * real
+        else:
+            return imag(self.val * other)
+    
+    #define print and tostring method
+    def __str__(self):
+        return str(self.val) + "i"
