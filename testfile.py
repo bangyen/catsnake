@@ -1,5 +1,6 @@
 import catsnake
 
-i = catsnake.comp(2,3)
-j = catsnake.imag(3)
-print(j)
+v = catsnake.vector2(23, 12)
+p = catsnake.point2(12, 3)
+
+p + v
