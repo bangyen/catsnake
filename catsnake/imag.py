@@ -7,12 +7,12 @@ class comp:
     #add 2 complex numbers
     def __add__(self, other):
         #add complex with other complex
-        if type(other) == "comp":
+        if isinstance(other, comp):
             r = self.real + other.real
             i = self.imag + other.imag
             return comp(r, i)
         #add complex with imaginary
-        if type(other) == "imag":
+        if isinstance(other, imag):
             i = self.imag + other.val
             return comp(self.real, i)
         #add complex with real
@@ -23,18 +23,36 @@ class comp:
     #subtract 2 complex numbers
     def __sub__(self, other):
         #subtract complex from other complex
-        if type(other) == "comp":
+        if isinstance(other, comp):
             r = self.real - other.real
             i = self.imag - other.imag
             return comp(r, i)
         #subtract imaginary from complex
-        if type(other) == "imag":
+        if isinstance(other, imag):
             i = self.imag - other.val
             return comp(self.real, i)
         #subtract real from complex
         else:
             r = self.real - other
             return comp(r, self.imag)
+    
+    #multiply for complex numbers
+    def __mul__(self, other):
+        #comp * comp
+        if isinstance(other, comp):
+            r = (self.real * other.real) - (self.imag * other.imag)
+            i = (self.imag * other.real) + (self.real * other.imag)
+            return comp(r, i)
+        #comp * imag
+        if isinstance(other, imag):
+            r = -(self.imag * other.val)
+            i = (self.real * other.val)
+            return comp(r, i)
+        #comp * real
+        else:
+            r = self.real * other
+            i = self.imag * other
+            return comp(r, i)
     
     #define print and to string method
     def __str__(self):
@@ -49,11 +67,11 @@ class imag:
     #add
     def __add__(self, other):
         #imag + imag
-        if type(other) == "imag":
+        if isinstance(other, imag):
             #return imag
             return imag(self.val + other.val)
         #imag + comp
-        if type(other) == "comp":
+        if isinstance(other, comp):
             #return complex
             return comp(other.real, other.imag + self.val)
         #imag + real
@@ -64,10 +82,10 @@ class imag:
     #subtract
     def __sub__(self, other):
         #imag - imag
-        if type(other) == "imag":
+        if isinstance(other, imag):
             return imag(self.val - other.val)
         #imag - complex
-        if type(other) == "comp":
+        if isinstance(other, comp):
             return comp(-other.real, self.val - other.imag)
         #imag - real
         else:
@@ -76,10 +94,10 @@ class imag:
     #multiply
     def __mul__(self, other):
         #imag * imag
-        if type(other) == "imag":
+        if isinstance(other, imag):
             return -1 * self.val * other.val
         #imag * complex
-        if type(other) == "comp":
+        if isinstance(other, comp):
             r = -1 * self.val * other.imag
             i = self.val * other.real
             return comp(r, i)
