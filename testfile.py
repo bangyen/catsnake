@@ -1,6 +1,13 @@
-import catsnake
+def add(i, j):
+    ans = i
+    for n in range(j):
+        ans = -~ans
+    return ans
 
-v = catsnake.vector2(23, 12)
-p = catsnake.point2(12, 3)
+def sub(i, j):
+    ans = i
+    for n in range(j):
+        ans = ~-ans
+    return ans
 
-p + v
+print(sub(3, 5))
