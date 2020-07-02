@@ -24,10 +24,10 @@ class vector3:
             return vector3(self.e[0]/other.e[0], self.e[1]/other.e[1], self.e[2]/other.e[2])
         #vector3 / num
         else:
-            return vector3(self.e[0]/other, self.e[1]/other, self.e[2]/other)
+            return self * (1 / other)
     
     def length_squared(self):
-        return (self.e[0] * self.e[0]) + (self.e[1] * self.e[1]) + (self.e[2] * self.e[2])
+        return sum(k ** 2 for k in self.e)
 
     def length(self):
         return math.sqrt(self.length_squared())
@@ -41,14 +41,9 @@ class vector3:
     def z(self):
         return self.e[2]
 
-    def r(self):
-        return self.e[0]
-    
-    def g(self):
-        return self.e[1]
-    
-    def b(self):
-        return self.e[2]
+    r = x
+    g = y
+    b = z
 
 point3 = vector3
 color = vector3
